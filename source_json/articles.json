@@ -1,0 +1,22 @@
+{
+  "articles": [
+    {
+      "id": 345,
+      "title": "Article #1",
+      "learn_min": 6346,
+      "alias": "/test-article"
+    },
+    {
+      "id": 6346,
+      "title": "Article #2",
+      "learn_min": 25,
+      "alias": "/test-article1"
+    },
+
+    {
+      "id": 634634,
+      "title": "Article #3",
+      "alias": "/test-article2"
+    }
+  ]
+}

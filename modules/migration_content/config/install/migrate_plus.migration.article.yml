@@ -1,0 +1,71 @@
+id: migration_content_article2
+label: 'JSON migration - Article rows'
+migration_tags: null
+migration_group: migrate_articles
+
+source:
+  plugin: url
+  # Specifies the http fetcher plugin.
+  data_fetcher_plugin: http
+  # Specifies the JSON parser plugin.
+  data_parser_plugin: json
+  headers:
+    Accept: 'application/json; charset=utf-8'
+    Content-Type: 'application/json'
+  # One or more URLs from which to fetch the source data.
+  urls: http://project2.local/articles.json
+  # For JSON, item_selector is the xpath used to select
+  # our source items (tags in this case).
+  item_selector: articles
+  # For each source field, we specify a selector,
+  # the field name which will be used to access the field in the
+  # process configuration, and a label to document the meaning
+  # of the field in front-ends.
+
+  fields:
+    -
+      # The name of the field to be used in the configuration context
+      name: id
+      label: 'ID Article'
+      selector: id
+    -
+      name: title
+      label: 'Title Article'
+      selector: title
+    -
+      name: learn_min
+      label: 'Learn min'
+      selector: learn_min
+    -
+      name: alias
+      label: 'URL of article'
+      selector: alias
+
+  # Under ids, we specify which of the source fields retrieved
+  # above (product_id in this case) represent our unique
+  # identifier for the item, and the schema type for that field.
+  ids:
+    id:
+      type: integer
+
+# The entity in which will import data.
+
+destination:
+  plugin: entity:node
+
+process:
+  type:
+    plugin: default_value
+    # Type of import content
+    default_value: article
+
+  title: title
+  field_learn_min: learn_min
+  path: alias
+
+  # Skip if row have empty value
+  sku:
+    -
+      plugin: skip_on_empty
+      method: row
+      source: id

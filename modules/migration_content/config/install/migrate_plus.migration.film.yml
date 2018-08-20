@@ -1,0 +1,64 @@
+id: migration_content_film2
+label: 'JSON migration - Film rows'
+migration_tags: null
+migration_group: migrate_films
+
+source:
+  plugin: url
+  data_fetcher_plugin: http
+  data_parser_plugin: json
+  headers:
+    Accept: 'application/json; charset=utf-8'
+    Content-Type: 'application/json'
+  urls: http://project2.local/films.json
+  item_selector: films
+
+  fields:
+    -
+      name: id
+      label: 'ID'
+      selector: id
+    -
+      name: title
+      label: 'Title'
+      selector: title
+    -
+      name: duration_minutes
+      label: 'Duration (minutes)'
+      selector: duration_minutes
+    -
+      name: iframe_url
+      label: 'Iframe URL'
+      selector: iframe_url
+    -
+      name: producer
+      label: 'Producer'
+      selector: producer
+
+  # Under ids, we specify which of the source fields retrieved
+  # above (product_id in this case) represent our unique
+  # identifier for the item, and the schema type for that field.
+  ids:
+    id:
+      type: integer
+
+# The entity in which will import data.
+
+destination:
+  plugin: entity:node
+
+process:
+  type:
+    plugin: default_value
+    default_value: film
+
+  title: title
+  field_duration: duration_minutes
+  field_iframe_url: iframe_url
+  #field_producer: producer
+
+  sku:
+    -
+      plugin: skip_on_empty
+      method: row
+      source: id

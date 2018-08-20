@@ -1,0 +1,9 @@
+name: Migration Content From Json
+type: module
+core: 8.x
+package: Migration
+dependencies:
+  - migrate
+  - migrate_plus
+  - migrate_tools
+  - node
