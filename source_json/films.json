@@ -6,16 +6,23 @@
       "producer": "Ксавье Жанс",
       "duration_minutes": 184,
       "iframe_url": "https://www.youtube.com/embed/rs7lyEWy36k",
-      "genres_ids": "89, 99"
+      "genres_ids": [
+        {
+          "genre_id": 89
+        }
+      ]
     },
-
     {
       "id": 2001,
       "title": "Приключения Паддингтона 2",
       "producer": "Пол Кинг",
       "duration_minutes": 125,
       "iframe_url": "https://www.youtube.com/embed/XWX2zGxr4Rg",
-      "genres_ids": "89, 93"
+      "genres_ids": [
+        {
+          "genre_id": 89
+        }
+      ]
     }
   ]
 }

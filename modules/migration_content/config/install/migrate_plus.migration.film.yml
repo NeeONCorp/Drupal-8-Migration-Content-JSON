@@ -1,4 +1,4 @@
-id: migration_content_film5
+id: migration_content_film10
 label: 'JSON migration - Film rows'
 migration_tags: null
 migration_group: migrate_films
@@ -35,18 +35,12 @@ source:
       label: 'Producer'
       selector: producer
     -
-      name: genres_string_ids
+      name: genres_ids
       label: 'Genres'
       selector: genres_ids
-
-  # Under ids, we specify which of the source fields retrieved
-  # above (product_id in this case) represent our unique
-  # identifier for the item, and the schema type for that field.
   ids:
     id:
       type: integer
-
-# The entity in which will import data.
 
 destination:
   plugin: entity:node
@@ -59,14 +53,26 @@ process:
   title: title
   field_duration: duration_minutes
   field_iframe_url: iframe_url
-  field_genre:
-    -
-      plugin: explode
-      delimiter: ', '
-      source: genres_string_ids
 
-  sku:
-    -
-      plugin: skip_on_empty
-      method: row
-      source: id
+  field_genre:
+    plugin: iterator
+    source: genres_ids
+    process:
+     temporary_ids:
+       plugin: migration_lookup
+
+       # Most likely the problem is in the string below,
+       # but I do not know how to solve it yet.
+
+       migration: migrate_genre
+       source: genre_id
+     target_id:
+       plugin: extract
+       source: '@temporary_ids'
+       index:
+         - 0
+     target_revision_id:
+       plugin: extract
+       source: '@temporary_ids'
+       index:
+         - 1
