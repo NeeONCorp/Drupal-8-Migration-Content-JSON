@@ -1,0 +1,30 @@
+id: migration_content_paragraph
+label: 'JSON migration - Paragraphs rows'
+migration_tags: null
+migration_group: migrate_paragraphs
+
+source:
+  plugin: url
+  data_fetcher_plugin: http
+  data_parser_plugin: json
+  urls: 'http://project2.local/paragraphs.json'
+
+  item_selector: 'paragraphs'
+  fields:
+  - name: id
+    label: Id
+    selector: id
+  - name: body
+    label: body
+    selector: body
+
+  ids:
+    id:
+      type: integer
+
+process:
+  'field_body/value': body
+
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: signature

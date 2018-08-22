@@ -4,7 +4,15 @@
       "id": 345,
       "title": "Article #1",
       "learn_min": 6346,
-      "alias": "/test-article"
+      "alias": "/test-article",
+      "paragraphs": [
+        {
+          "paragraph_id": 50
+        },
+        {
+          "paragraph_id": 51
+        }
+      ]
     },
     {
       "id": 6346,
@@ -12,7 +20,6 @@
       "learn_min": 25,
       "alias": "/test-article1"
     },
-
     {
       "id": 634634,
       "title": "Article #3",
