@@ -11,12 +11,14 @@ source:
 
   item_selector: 'paragraphs'
   fields:
-  - name: id
-    label: Id
-    selector: id
-  - name: body
-    label: body
-    selector: body
+    -
+      name: id
+      label: Id
+      selector: id
+    -
+      name: body
+      label: body
+      selector: body
 
   ids:
     id:
